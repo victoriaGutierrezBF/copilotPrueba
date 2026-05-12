@@ -3,7 +3,7 @@ services:
     build: .
     container_name: jwt-fastapi-backend
     environment:
-      JWT_SECRET_KEY: dev-secret-change-me-at-least-32chars
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-dev-only-jwt-secret-change-immediately-9f1b4e2a7c6d8f3a5b0e4d2c1a9f7b6c}
       ADMIN_USERNAME: admin
       ADMIN_PASSWORD: admin123
     ports:

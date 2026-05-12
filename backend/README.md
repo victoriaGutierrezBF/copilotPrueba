@@ -72,6 +72,7 @@ API disponible en: `http://localhost:8000`
 Desde la carpeta `backend`:
 
 ```bash
+export JWT_SECRET_KEY="tu-secreto-seguro-con-alta-entropia-y-64-caracteres"
 docker compose up --build
 ```
 

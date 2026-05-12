@@ -37,7 +37,7 @@ def create_token(subject: str, expires_in_seconds: int, token_type: str) -> str:
 
 
 @app.post("/token")
-def generate_token(request: LoginRequest) -> dict[str, str | int]:
+def login(request: LoginRequest) -> dict[str, str | int]:
     if request.username != VALID_USERNAME or request.password != VALID_PASSWORD:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
