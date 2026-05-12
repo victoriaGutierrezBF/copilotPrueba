@@ -5,6 +5,8 @@ Aplicación Web API en FastAPI que implementa autenticación básica con JWT par
 - **usuario**: `admin`
 - **password**: `admin123`
 
+> Nota: es un ejemplo de demostración. Para producción debes cambiar credenciales y secreto JWT por variables de entorno seguras.
+
 ## Endpoints
 
 ### 1) Generar token
@@ -58,6 +60,7 @@ Respuesta exitosa:
 Desde la carpeta `backend`:
 
 ```bash
+export JWT_SECRET_KEY="tu-secreto-seguro-con-32-caracteres-minimo"
 poetry install
 poetry run uvicorn app.main:app --reload
 ```
@@ -71,5 +74,7 @@ Desde la carpeta `backend`:
 ```bash
 docker compose up --build
 ```
+
+`docker-compose.yml` ya define variables de ejemplo para ejecutar localmente.
 
 API disponible en: `http://localhost:8000`

@@ -2,5 +2,9 @@ services:
   backend:
     build: .
     container_name: jwt-fastapi-backend
+    environment:
+      JWT_SECRET_KEY: dev-secret-change-me-at-least-32chars
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin123
     ports:
       - "8000:8000"
