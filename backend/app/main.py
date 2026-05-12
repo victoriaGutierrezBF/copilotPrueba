@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
 import os
+import secrets
 
 import jwt
 from fastapi import FastAPI, HTTPException
@@ -17,8 +18,10 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_SECONDS = 300
 REFRESH_TOKEN_EXPIRE_SECONDS = 3600
 
-VALID_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
-VALID_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
+VALID_USERNAME = os.getenv("ADMIN_USERNAME")
+VALID_PASSWORD = os.getenv("ADMIN_PASSWORD")
+if not VALID_USERNAME or not VALID_PASSWORD:
+    raise RuntimeError("ADMIN_USERNAME and ADMIN_PASSWORD environment variables are required")
 
 
 class LoginRequest(BaseModel):
@@ -38,7 +41,10 @@ def create_token(subject: str, expires_in_seconds: int, token_type: str) -> str:
 
 @app.post("/token")
 def login(request: LoginRequest) -> dict[str, str | int]:
-    if request.username != VALID_USERNAME or request.password != VALID_PASSWORD:
+    if not (
+        secrets.compare_digest(request.username, VALID_USERNAME)
+        and secrets.compare_digest(request.password, VALID_PASSWORD)
+    ):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     access_token = create_token(request.username, ACCESS_TOKEN_EXPIRE_SECONDS, "access")

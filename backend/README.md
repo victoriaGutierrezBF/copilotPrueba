@@ -61,6 +61,8 @@ Desde la carpeta `backend`:
 
 ```bash
 export JWT_SECRET_KEY="tu-secreto-seguro-con-32-caracteres-minimo"
+export ADMIN_USERNAME="admin"
+export ADMIN_PASSWORD="admin123"
 poetry install
 poetry run uvicorn app.main:app --reload
 ```
@@ -73,9 +75,11 @@ Desde la carpeta `backend`:
 
 ```bash
 export JWT_SECRET_KEY="tu-secreto-seguro-con-alta-entropia-y-64-caracteres"
+export ADMIN_USERNAME="admin"
+export ADMIN_PASSWORD="admin123"
 docker compose up --build
 ```
 
-`docker-compose.yml` ya define variables de ejemplo para ejecutar localmente.
+`docker-compose.yml` toma estas variables desde tu entorno.
 
 API disponible en: `http://localhost:8000`
